@@ -1,0 +1,17 @@
+name: "Test Dispatch"
+on: 
+  workflow_dispatch:
+
+jobs:
+    build-and-deploy:
+      name: Setup, Build and Publish
+      runs-on: ubuntu-latest
+      steps:
+      # checkout the repo
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          repository:  com619-2021/IntegrationB 
+          event-type: my-event
+          client-payload: '{"foo": "tester"}'
