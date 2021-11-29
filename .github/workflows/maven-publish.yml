@@ -14,4 +14,4 @@ jobs:
           token: ${{ secrets.REPO_TOKEN }}
           repository:  com619-2021/IntegrationB 
           event-type: deploy
-          client-payload: '{"image_owner": "PORT_IMAGE", "image_tag": "nginx:latest"}'
+          client-payload: '{"image_owner": "PORT_IMAGE", "image_tag": "grafana/grafana:latest"}'
