@@ -7,11 +7,19 @@ jobs:
       name: Setup, Build and Publish
       runs-on: ubuntu-latest
       steps:
-      # checkout the repo
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+      - name: "Verify Build"
+        working-directory: <MAVEN_BUILD_DIR>
+        run: |
+          mvn --batch-mode --update-snapshots test 
+      - name: Bump version and push tag
+        id: tag_version
+        if: github.ref == 'refs/heads/master'
+        uses: mathieudutour/github-tag-action@v5.6
         with:
-          token: ${{ secrets.REPO_TOKEN }}
-          repository:  com619-2021/IntegrationB 
-          event-type: deploy
-          client-payload: '{"image_owner": "PORT_IMAGE", "image_tag": "grafana/grafana:latest"}'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Don't run
+        if: github.ref == 'refs/heads/develop'
+        run:
+          echo "ahhh"
