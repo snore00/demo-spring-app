@@ -9,10 +9,6 @@ jobs:
       steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
-      - name: "Verify Build"
-        working-directory: <MAVEN_BUILD_DIR>
-        run: |
-          mvn --batch-mode --update-snapshots test 
       - name: Bump version and push tag
         id: tag_version
         if: github.ref == 'refs/heads/master'
