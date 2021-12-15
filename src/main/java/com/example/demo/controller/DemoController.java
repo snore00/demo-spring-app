@@ -25,6 +25,7 @@ public class DemoController {
     @GetMapping("/api/demo/")
     public Demo getDemo(@RequestParam(name="id") String id) {
         log.info("Demo endpoint accessed.");
+        
         Optional<Demo> result = this.demoRepository.findById(id);
         if (result.isPresent()) {
             return result.get();
